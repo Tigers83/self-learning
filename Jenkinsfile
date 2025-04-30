@@ -5,7 +5,7 @@ checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs:
     }
     stage('Code Analysis')
     {
-        build job: 'Code Analysis', parameters: [string(name: 'workspace', value: '')]
+        build 'Code Analysis'
     }
 
     
