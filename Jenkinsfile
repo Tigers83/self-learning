@@ -20,19 +20,13 @@ node {
     {
         build job: 'Code Package', parameters: [string(name: 'workspace', value: '')]
     }
-
-
-    stages {
-        stage('SonarQube Analysis') {
-            steps {
-                script {
-                    sh 'sonar-scanner -Dsonar.host.url=http://localhost:8080'
-                }
+    stage('SonarQube Analysis') {
+        steps {
+            script {
+                sh 'sonar-scanner -Dsonar.host.url=http://localhost:8080'
             }
         }
     }
-
-    
     stage('Code Deploy')
     {
         build 'Code Deploy' 
