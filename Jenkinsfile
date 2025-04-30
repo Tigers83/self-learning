@@ -1,7 +1,7 @@
 node {
 
     environment {
-    SONAR_TOKEN = credentials('sonar-token')
+    SONAR_TOKEN = credentials('self_learning')
     }
     
     stage('Checkout')
