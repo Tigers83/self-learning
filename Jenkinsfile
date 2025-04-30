@@ -1,4 +1,3 @@
-def workspace
 node {
     stage('Checkout')
     {
