@@ -7,6 +7,14 @@ node {
     {
     build job: 'Code Compile', parameters: [string(name: 'workspace', value: '')]
     }
+    stage('Code Unity Test')
+    {
+        build job: 'Code Unit Test', parameters: [string(name: 'workspace', value: '')]
+    }
+    stage('Code Package')
+    {
+        build job: 'Code Package', parameters: [string(name: 'workspace', value: '')]
+    }
 
     
 }
