@@ -21,7 +21,7 @@ node {
         build job: 'Code Package', parameters: [string(name: 'workspace', value: '')]
     }
 stage('SonarQube Analysis') {
-    sh 'sonar-scanner -Dsonar.projectKey=YourProject -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000'
+    sh 'sonar-scanner -Dsonar.projectKey=YourProject -Dsonar.sources=. -Dsonar.host.url=http://localhost:8080'
 }
 
     stage('Code Deploy')
