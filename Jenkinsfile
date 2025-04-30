@@ -21,8 +21,14 @@ node {
         build job: 'Code Package', parameters: [string(name: 'workspace', value: '')]
     }
 stage('SonarQube Analysis') {
-    sh 'sonar-scanner -Dsonar.projectKey=YourProject -Dsonar.sources=. -Dsonar.host.url=http://localhost:8080'
+    withEnv(["SONAR_TOKEN=${credentials('self_learning')}"]) {
+        withSonarQubeEnv('SonarQubeServer') {
+            def scannerHome = tool 'SonarScanner'
+            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=self-learning -Dsonar.sources=. -Dsonar.host.url=http://localhost:8080"
+        }
+    }
 }
+
 
     stage('Code Deploy')
     {
