@@ -15,8 +15,11 @@ node {
     {
         build job: 'Code Package', parameters: [string(name: 'workspace', value: '')]
     }
+    stage('Code Deploy')
+    {
+        build 'Code Deploy' 
+    }
 
-    
 }
 
 
