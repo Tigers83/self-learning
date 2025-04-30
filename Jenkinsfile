@@ -1,4 +1,9 @@
 node {
+
+    environment {
+    SONAR_TOKEN = credentials('sonar-token')
+    }
+    
     stage('Checkout')
     {
     checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Tigers83/self-learning.git']])    
@@ -19,6 +24,19 @@ node {
     {
         build job: 'Code Package', parameters: [string(name: 'workspace', value: '')]
     }
+
+
+    stages {
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    sh 'sonar-scanner -Dsonar.host.url=http://localhost:8080'
+                }
+            }
+        }
+    }
+
+    
     stage('Code Deploy')
     {
         build 'Code Deploy' 
