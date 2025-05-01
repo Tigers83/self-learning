@@ -20,17 +20,15 @@ node {
     {
         build job: 'Code Package', parameters: [string(name: 'workspace', value: '')]
     }
-    stage('SAST - SonarQube') {
-        steps {
-            sh 'echo $SONAR_SCANNER_HOME'
-            sh'''
-                $SONAR_SCANNER_HOME/bin/sonar-scanner \
-                    -Dsonar.projectKey=Solar-System-Project \
-                    -Dsonar.sources=. \
-                    -Dsonar.host.url=http://localhost:9000 \
-                    -Dsonar.login=sqp_3024dde79b3d62f92c1b50be365c45de0817dd9c
-            '''
-        }
+stage('SAST - SonarQube') {
+    sh '''
+        echo $SONAR_SCANNER_HOME
+        $SONAR_SCANNER_HOME/bin/sonar-scanner \
+            -Dsonar.projectKey=Solar-System-Project \
+            -Dsonar.sources=. \
+            -Dsonar.host.url=http://localhost:9000 \
+            -Dsonar.login=sqp_3024dde79b3d62f92c1b50be365c45de0817dd9c
+    '''
 }
 
 
