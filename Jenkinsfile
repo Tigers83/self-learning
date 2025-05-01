@@ -1,9 +1,5 @@
 node {
 
-    environment {
-        SONAR_SCANNER_HOME = tool 'sonarqube-scanner-610';
-    }
-
     stage('Checkout')
     {
     checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Tigers83/self-learning.git']])    
@@ -20,13 +16,6 @@ node {
     {
         build job: 'Code Package', parameters: [string(name: 'workspace', value: '')]
     }
-stage('SAST - SonarQube') {
-        withSonarQubeEnv('MySonarServer') {
-            sh 'sonar-scanner -Dsonar.projectKey=sonar-scanner -Dsonar.sources=.'
-        }
-    }
-}
-
 
     stage('Code Deploy')
     {
