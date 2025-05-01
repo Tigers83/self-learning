@@ -23,11 +23,11 @@ node {
 stage('SAST - SonarQube') {
     sh '''
         echo $SONAR_SCANNER_HOME
-             sonar-scanner \
-            -Dsonar.projectKey=Solar-System-Project \
-            -Dsonar.sources=. \
-            -Dsonar.host.url=http://localhost:9000 \
-            -Dsonar.login=sqp_3024dde79b3d62f92c1b50be365c45de0817dd9c
+            sonar-scanner \
+              -Dsonar.projectKey=sonar-scanner \
+              -Dsonar.sources=. \
+              -Dsonar.host.url=http://localhost:9000 \
+              -Dsonar.login=sqp_f63a802fba697a6de7a558fab7f64ee6457846ce
     '''
 }
 
