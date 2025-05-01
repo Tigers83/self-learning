@@ -1,9 +1,9 @@
 node {
 
     environment {
-    SONAR_TOKEN = credentials('self_learning')
+        SONAR_SCANNER_HOME = tool 'sonarqube-scanner-610';
     }
-    
+
     stage('Checkout')
     {
     checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Tigers83/self-learning.git']])    
@@ -20,13 +20,17 @@ node {
     {
         build job: 'Code Package', parameters: [string(name: 'workspace', value: '')]
     }
-stage('SonarQube Analysis') {
-    withEnv(["SONAR_TOKEN=${credentials('self_learning')}"]) {
-        withSonarQubeEnv('SonarQubeServer') {
-            def scannerHome = tool 'SonarScanner'
-            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=self-learning -Dsonar.sources=. -Dsonar.host.url=http://localhost:8080"
+    stage('SAST - SonarQube') {
+        steps {
+            sh 'echo $SONAR_SCANNER_HOME'
+            sh'''
+                $SONAR_SCANNER_HOME/bin/sonar-scanner \
+                    -Dsonar.projectKey=Solar-System-Project \
+                    -Dsonar.sources=. \
+                    -Dsonar.host.url=http://localhost:9000 \
+                    -Dsonar.login=sqp_3024dde79b3d62f92c1b50be365c45de0817dd9c
+            '''
         }
-    }
 }
 
 
