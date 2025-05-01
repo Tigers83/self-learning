@@ -4,10 +4,6 @@ node {
         SONAR_SCANNER_HOME = tool 'sonarqube-scanner-610';
     }
 
-        tools {
-        sonarQubeScanner 'sonar-scanner'  // Matches what you named in the Tool Configuration
-    }
-
     stage('Checkout')
     {
     checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Tigers83/self-learning.git']])    
